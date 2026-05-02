@@ -1,0 +1,17 @@
+models:
+  - name: fact_orders
+    description: "Order fact table"
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_sk
+        tests:
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_sk
+
+  - name: dim_customers
+    description: "Customer dimension with historical tracking (SCD Type 2)"
